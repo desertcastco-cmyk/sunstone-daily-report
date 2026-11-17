@@ -101,87 +101,51 @@
   <header>
     <div class="logowrap"><svg viewBox="0 0 360 84" width="190" height="44" role="img" aria-label="SunStone Building Specialties"><text x="180" y="40" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="42" font-weight="bold" fill="#ffffff">SunStone</text><text x="180" y="70" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="15.5" letter-spacing="3.5" fill="#cbd5e1">BUILDING SPECIALTIES</text></svg></div>
     <h1>Service Daily Report</h1>
-    <p class="sub">Service &amp; warranty work. Complete before end of the day.</p>
+    <p class="sub">(make sure to always get a signature for the work order)</p>
   </header>
-
 
   <form id="form" autocomplete="off">
     <section class="card">
-      <h2><span class="num">1</span> Who&rsquo;s Filing This?</h2>
-      <p class="hint">Tap your name.</p>
-      <label>Submitted By <span class="req">*</span></label>
-      <div class="chips" id="leadChips"></div>
-    </section>
-
-    <section class="card">
-      <h2><span class="num">2</span> Job</h2>
-      <p class="hint">Start typing the job name or number &mdash; no more scrolling a long list.</p>
-      <label for="date">Date <span class="req">*</span></label>
-      <input type="date" id="date" required>
+      <h2><span class="num">1</span> The Job</h2>
       <label for="jobSearch">Job Name <span class="req">*</span></label>
       <div class="picker">
-        <input type="text" id="jobSearch" placeholder="Type to search &mdash; e.g. Four Seasons">
+        <input type="text" id="jobSearch" placeholder="Type to search &mdash; e.g. Wynn">
         <div class="results" id="jobResults"></div>
       </div>
-      <label>Manufacturer <span class="req">*</span></label>
-      <p class="hint">Whose wall did you service? Older buildings may have another maker&rsquo;s wall.</p>
-      <div class="chips" id="mfrChips"></div>
-      <input type="text" id="mfrOther" placeholder="Other manufacturer &mdash; type it here" style="display:none;margin-top:10px">
-    </section>
-
-    <section class="card">
-      <h2><span class="num">3</span> The Work</h2>
       <label for="work">Work Performed <span class="req">*</span></label>
-      <textarea id="work" placeholder="What got done today &mdash; e.g. Hung pocket doors, patched astragal on C-suites&hellip;"></textarea>
+      <textarea id="work" placeholder="What got done on site"></textarea>
+      <label>Product Serviced <span class="req">*</span></label>
+      <div class="chips" id="productChips"></div>
+      <label for="housingId">Housing ID/Screen ID/Wall Job Number/Etc. <span class="opt">(optional)</span></label>
+      <input type="text" id="housingId" placeholder="Housing ID, screen ID, wall job number&hellip;">
     </section>
 
     <section class="card">
-      <h2><span class="num">4</span> Crew &amp; Time on Site</h2>
-      <p class="hint">Tap everyone who was on site today.</p>
+      <h2><span class="num">2</span> Work Order &amp; Crew</h2>
+      <label>Work Order Signed <span class="req">*</span></label>
+      <div class="chips" id="signedChips"></div>
       <label>Crew Members <span class="req">*</span></label>
+      <p class="hint">Tap everyone who was on site.</p>
       <div class="chips" id="crewChips"></div>
-      <label>Jobsite Arrival <span class="req">*</span></label>
-      <div class="tw-head"><span>HOUR</span><span>MIN</span><span></span></div>
-      <div class="tw-wheel" id="wheelArr">
-        <div class="tw-fadeT"></div><div class="tw-fadeB"></div><div class="tw-band"></div>
-        <div class="tw-col" data-part="h"></div>
-        <div class="tw-col" data-part="m"></div>
-        <div class="tw-col ap" data-part="ap"></div>
-      </div>
-      <label>Jobsite Departure <span class="req">*</span></label>
-      <div class="tw-head"><span>HOUR</span><span>MIN</span><span></span></div>
-      <div class="tw-wheel" id="wheelDep">
-        <div class="tw-fadeT"></div><div class="tw-fadeB"></div><div class="tw-band"></div>
-        <div class="tw-col" data-part="h"></div>
-        <div class="tw-col" data-part="m"></div>
-        <div class="tw-col ap" data-part="ap"></div>
-      </div>
-      <div class="tw-total" id="totalRow">
-        <span class="lab">Total time on site</span>
-        <span class="val" id="totalVal"></span>
-      </div>
+      <label for="hoursWorked">Hours Worked on Site <span class="req">*</span></label>
+      <input type="text" id="hoursWorked" inputmode="decimal" placeholder="e.g. 8.5">
     </section>
 
     <section class="card">
-      <h2><span class="num">5</span> Details &amp; Photos</h2>
-      <label for="equipment">Equipment on Site <span class="req">*</span></label>
-      <input type="text" id="equipment" placeholder="Rentals / shop lifts &mdash; or None">
-      <label for="delays">Delays / Issues <span class="req">*</span></label>
-      <textarea id="delays" style="min-height:70px" placeholder="Anything that slowed the job down &mdash; waiting on GC, material, access&hellip;"></textarea>
-      <div class="chips" style="margin-top:9px">
-        <span class="chip dash" id="noDelays">&#10003; No delays today</span>
-      </div>
-      <label>Jobsite POC <span class="opt">(optional)</span></label>
-      <div id="pocList"></div>
-      <button type="button" class="addbtn" id="addPoc">+ Add another POC</button>
-      <div class="pocCount" id="pocCount"></div>
-      <label>Jobsite Photos <span class="opt">(optional, up to 10)</span></label>
+      <h2><span class="num">3</span> Wrap-Up</h2>
+      <label>Submitted By <span class="req">*</span></label>
+      <div class="chips" id="leadChips"></div>
+      <label for="recommended">Recommended Parts/Service <span class="req">*</span></label>
+      <input type="text" id="recommended" placeholder="Parts or follow-up service the job needs">
+      <label for="poc">Jobsite POC <span class="opt">(optional)</span></label>
+      <input type="text" id="poc" placeholder="Name + phone &mdash; e.g. Gary, (702) 555-0123">
+      <label>Jobsite Photos (10 max limit) <span class="opt">(optional)</span></label>
       <div class="photozone">
         <p>Progress, finished work, issues</p>
-        <button type="button" class="addbtn" id="addPhotos">+ Add photos</button>
-        <input type="file" id="fileInput" accept="image/*" multiple hidden>
-        <div class="thumbs" id="thumbs"></div>
-        <div class="count" id="photoCount">0 of 10 photos</div>
+        <button type="button" class="addbtn" id="photosAdd">+ Add photos</button>
+        <input type="file" id="photosInput" accept="image/*" multiple hidden>
+        <div class="thumbs" id="photosThumbs"></div>
+        <div class="count" id="photosCount">0 of 10 photos</div>
       </div>
     </section>
 
@@ -190,9 +154,8 @@
 
   <div id="success">
     <div class="big">&#9989;</div>
-    <h2>Report filed</h2>
+    <h2>Your response has been recorded</h2>
     <p id="successText"></p>
-    <p class="learned" id="learnedText"></p>
     <button type="button" onclick="location.reload()">File another report</button>
   </div>
 </div>
@@ -204,312 +167,165 @@
 </div>
 
 <script>
-var DATA = null, selectedJob = '', hours = 8, photos = [];
-
-function baseName(job){
-  return String(job||'').replace(/\s*\((MF|SG|SF|KW|ST)\)\s*(\d{6})?\s*$/,'').replace(/\s+\d{6}\s*$/,'').trim();
-}
-function $(id){ return document.getElementById(id); }
-
 var STAGING = true; // GO-LIVE: set false and put the Service backend /exec URL in API
 var API = '';
-var DATA = { jobs: ["10-26 NLV City Hall SG PM 2026-27 — Service 159526", "11-26 Myrtle Tate ES - Expander and Labor — Service 160126", "7-Eleven Kalwall Panel Replacement 4.8.26 — Service 156626", "A.I.L.V. SG PM 5-26 — Service 152626", "Ahern Hotel MF — Service 141024", "Aliante SG — Service 138824", "Aria MF — Service 112419", "Aria SG PM Contract 2024-25 — Service 144224", "Aria SG PM Contract 2026-27 — Service 158726", "Atomic Museum SG — Service 150925", "Aviation Nation SG — Service 146224", "Bellagio — Service 111017", "Boy Scouts of America Door Latch — Service 142324", "Boyd — Service 140424", "CCSD Gibson SG + ST PM 9-26 — Service 158426", "CCSD Kenneth Divich ES KW — Service 150625", "CCSD Legacy HS — Service 152825", "CCSD Sandy Valley MF — Service 153025", "Centennial Hills Hospital — Service 151025", "Christ the King Catholic Community — Service 153925", "Church of Jesus Christ LDS MF — Service 154125", "Circa — Service 146324", "Community Ambulance MF PM 4-26 — Service 156026", "Conrad Halls — Service 147225", "Cosmopolitan MF PM — Service 148025", "Cosmopolitan PM ST — Service 149125", "CSN — Service 152125", "Dignity Health — Service 149925", "Discount Tires MF — Service 140724", "Downtown Grand MF — Service 153225", "Downtown Grand SG — Service 152325", "Durango Station SG — Service 148525", "Ellis Island SG — Service 149225", "Encore Boston MF — Service 149325", "Essence Dispensary MF — Service 147925", "Ethel M's MF — Service 140824", "Excalibur SG — Service 151425", "Fiesta Henderson — Service 142524", "Fiesta Rancho — Service 143524", "Fontainebleau Parts and Service 2-26 — Service 154326", "Fontainbleau BLVD Bar SG — Service 151225", "Fontainbleau MF — Service 148725", "Fontainbleau SG — Service 144924", "Fontainebleau Call — Service 143424", "Golden Nugget SG — Service 151125", "Green Valley MF Panel Replacement — Service 152225", "GVR MF — Service 138924", "GVR SG — Service 150525", "GVR SG PM 2024 — Service 144324", "Hampton Inn MF — Service 149625", "Hard Rock Punta Cana SG — Service 147625", "Henderson Hospital MF — Service 149525", "Henderson Multigenerational Center MF — Service 144424", "Home Depot Smoke Curtain 9.15.25 — Service 151725", "ITC - Industrial Technical Ceilings 8-6-26 — Service 157926", "Jerome — Service 140624", "Jewel Homes — Service 140924", "JW Marriott — Service 146924", "Kirksey Construction — Service 147825", "Lakeside Inn — Service 148625", "Las Vegas Athletic Club MF — Service 148225", "LCB Building 17 SFA3 MF — Service 142024", "Lifeguard Arena MF — Service 150225", "Linq Promenade — Service 149825", "Luxor MF — Service 149725", "M Resort 2-26 — Service 154026", "Mandalay Bay MF — Service 144824", "MGM Grand MF — Service 149425", "MGM NYNY — Service 140224", "MGM Park — Service 144124", "MGM Skylofts — Service 150825", "MGM Springfield MF — Service 145024", "Mirage MF — Service 145224", "Mirage SG — Service 145124", "Mobiloans SG — Service 150325", "Morgan & Morgan — Service 136624", "Mountain Shadows Com Ctr PM 6-26 — Service 156926", "Mountain View Hospital — Service 154525", "NAFB SG — Service 142224", "Neon Museum SG — Service 144624", "Nevada State University MF — Service 153626", "NV State University MF Chain 1-26 — Service 153326", "Orleans MF — Service 151625", "Orleans SG — Service 152425", "Palm Mortuary — Service 152225", "Palms MF — Service 150425", "Paris MF — Service 141324", "Paris SG PM 2024-25 — Service 144724", "Paris SG PM — Service 153825", "Pearl Theater - Palms 10-26 — Service 159826", "Peppermill Reno — Service 115219", "Planet Hollywood Marquee — Service 154925", "Project Neon — Service 147325", "Project VCR — Service 148925", "Rita Deanin Abbey Art Museum 3-26 — Service 155326", "Sante Fe MF — Service 150125", "Siena Suites — Service 142824", "Siena MF — Service 151925", "Silver Mesa Crank Handle 9.15.25 — Service 152025", "Silverton MF — Service 150625", "Smart City — Service 154625", "SMUD SG — Service 147125", "Sonic MF — Service 153725", "South Point MF — Service 151525", "South Point SG — Service 150725", "St John Baptist Church Greek Orthodox 6-26 — Service 157026", "Sun City Anthem — Service 154225", "Sunrise Childrens Hospital SG — Service 147425", "Sunrise Childrens Hospital Transformer — Service 152725", "Sunrise Hospital PM SG 3.5.26 — Service 155226", "Sunrise Hospital SG 7.27.23 — Service 131323", "UBC-International Training Ctr 6-26 — Service 157126", "Venetian Expo Halls — Service 154425", "Venetian Expo MF — Service 154825", "Venetian Level 2 SG — Service 152925", "Venetian Level 3-4 Inspection 5.15.25 — Service 147725", "Venetian TI SG — Service 151825", "Virgin Hotels - Las Vegas MF 12-25 — Service 152925", "Walmart Distribution Center — Service 140324", "Westgate SG/MF — Service 141424", "Westin SG — Service 148825", "Wynn MF — Service 134619", "Wynn SG Parts 5.10.24 — Service 141224", "9-26 CCSD Ed Von Tobel — Warranty 975426", "10-26 Symphony Park Hotel - SG — Warranty 975826", "10-26 VCR - MF — Warranty 975726", "Brinley MS — Warranty 974526", "CCSD CW Woodbury — Warranty 975526", "Center of Excellence — Warranty 973025", "CHF Durango Drop-Seal Mech. 5.19.24 — Warranty 971925", "CoLV SF — Warranty 972825", "Deloitte — Warranty 971524", "Desert Vista — Warranty 975326", "DYDYT — Warranty 971324", "Eide Bailey — Warranty 972525", "Fontanesi — Warranty 972025", "Gensler Office 6.2.25 — Warranty 972425", "GVR MF — Warranty 975126", "Helix Electric ST — Warranty 973925", "Jerome Mack KW — Warranty 972725", "LCB Building 17 — Warranty 973325", "Mark 1 Apartments — Warranty 974425", "MGM Legal — Warranty 973625", "Mountain View Hospital — Warranty 971824", "OYO Hotel — Warranty 972625", "Park MGM — Warranty 973825", "Planet Hollywood — Warranty 973525", "Project Neon — Warranty 972225", "Red Rock — Warranty 973725", "Sands — Warranty 973125", "Silver Mesa Recreation Center 9.15.25 — Warranty 973925", "Stonebridge Meetinghouse MF Jamb 5-26 — Warranty 975826", "Sunset — Warranty 972325", "UNLV Med School — Warranty 975226", "VCR - Jerry's — Warranty 973425", "Venetian Opera — Warranty 972125", "Venetian Tower — Warranty 972425", "West Career — Warranty 974325", "WKSY Stadium — Warranty 971924", "Wynn — Warranty 971424", "Wynn Encore — Warranty 971224", "Wynn Nightclub — Warranty 971624", "Wynn Pier — Warranty 971724", "Wynn TI — Warranty 971824"], crew: ["Kai", "Chris", "Zane", "Edurado Sr", "Armando", "Robert", "Steven", "Edurado Jr", "Fabian", "Jose", "Mike", "Anthony"], leads: ["Robert", "Eduardo Jr", "Chris", "Fabian", "Mike", "Zane", "Kevin"], directory: [], manufacturers: ["Modernfold", "Hufcor", "Smoke Guard", "Skyfold", "Kalwall", "Solatube", "Other"] };
+var DATA = { jobs: ["10-26 NLV City Hall SG PM 2026-27 — Service 159526", "11-26 Myrtle Tate ES - Expander and Labor — Service 160126", "7-Eleven Kalwall Panel Replacement 4.8.26 — Service 156626", "A.I.L.V. SG PM 5-26 — Service 152626", "Ahern Hotel MF — Service 141024", "Aliante SG — Service 138824", "Aria MF — Service 112419", "Aria SG PM Contract 2024-25 — Service 144224", "Aria SG PM Contract 2026-27 — Service 158726", "Atomic Museum SG — Service 150925", "Aviation Nation SG — Service 146224", "Bellagio — Service 111017", "Boy Scouts of America Door Latch — Service 142324", "Boyd — Service 140424", "CCSD Gibson SG + ST PM 9-26 — Service 158426", "CCSD Kenneth Divich ES KW — Service 150625", "CCSD Legacy HS — Service 152825", "CCSD Sandy Valley MF — Service 153025", "Centennial Hills Hospital — Service 151025", "Christ the King Catholic Community — Service 153925", "Church of Jesus Christ LDS MF — Service 154125", "Circa — Service 146324", "Community Ambulance MF PM 4-26 — Service 156026", "Conrad Halls — Service 147225", "Cosmopolitan MF PM — Service 148025", "Cosmopolitan PM ST — Service 149125", "CSN — Service 152125", "Dignity Health — Service 149925", "Discount Tires MF — Service 140724", "Downtown Grand MF — Service 153225", "Downtown Grand SG — Service 152325", "Durango Station SG — Service 148525", "Ellis Island SG — Service 149225", "Encore Boston MF — Service 149325", "Essence Dispensary MF — Service 147925", "Ethel M's MF — Service 140824", "Excalibur SG — Service 151425", "Fiesta Henderson — Service 142524", "Fiesta Rancho — Service 143524", "Fontainebleau Parts and Service 2-26 — Service 154326", "Fontainbleau BLVD Bar SG — Service 151225", "Fontainbleau MF — Service 148725", "Fontainbleau SG — Service 144924", "Fontainebleau Call — Service 143424", "Golden Nugget SG — Service 151125", "Green Valley MF Panel Replacement — Service 152225", "GVR MF — Service 138924", "GVR SG — Service 150525", "GVR SG PM 2024 — Service 144324", "Hampton Inn MF — Service 149625", "Hard Rock Punta Cana SG — Service 147625", "Henderson Hospital MF — Service 149525", "Henderson Multigenerational Center MF — Service 144424", "Home Depot Smoke Curtain 9.15.25 — Service 151725", "ITC - Industrial Technical Ceilings 8-6-26 — Service 157926", "Jerome — Service 140624", "Jewel Homes — Service 140924", "JW Marriott — Service 146924", "Kirksey Construction — Service 147825", "Lakeside Inn — Service 148625", "Las Vegas Athletic Club MF — Service 148225", "LCB Building 17 SFA3 MF — Service 142024", "Lifeguard Arena MF — Service 150225", "Linq Promenade — Service 149825", "Luxor MF — Service 149725", "M Resort 2-26 — Service 154026", "Mandalay Bay MF — Service 144824", "MGM Grand MF — Service 149425", "MGM NYNY — Service 140224", "MGM Park — Service 144124", "MGM Skylofts — Service 150825", "MGM Springfield MF — Service 145024", "Mirage MF — Service 145224", "Mirage SG — Service 145124", "Mobiloans SG — Service 150325", "Morgan & Morgan — Service 136624", "Mountain Shadows Com Ctr PM 6-26 — Service 156926", "Mountain View Hospital — Service 154525", "NAFB SG — Service 142224", "Neon Museum SG — Service 144624", "Nevada State University MF — Service 153626", "NV State University MF Chain 1-26 — Service 153326", "Orleans MF — Service 151625", "Orleans SG — Service 152425", "Palm Mortuary — Service 152225", "Palms MF — Service 150425", "Paris MF — Service 141324", "Paris SG PM 2024-25 — Service 144724", "Paris SG PM — Service 153825", "Pearl Theater - Palms 10-26 — Service 159826", "Peppermill Reno — Service 115219", "Planet Hollywood Marquee — Service 154925", "Project Neon — Service 147325", "Project VCR — Service 148925", "Rita Deanin Abbey Art Museum 3-26 — Service 155326", "Sante Fe MF — Service 150125", "Siena Suites — Service 142824", "Siena MF — Service 151925", "Silver Mesa Crank Handle 9.15.25 — Service 152025", "Silverton MF — Service 150625", "Smart City — Service 154625", "SMUD SG — Service 147125", "Sonic MF — Service 153725", "South Point MF — Service 151525", "South Point SG — Service 150725", "St John Baptist Church Greek Orthodox 6-26 — Service 157026", "Sun City Anthem — Service 154225", "Sunrise Childrens Hospital SG — Service 147425", "Sunrise Childrens Hospital Transformer — Service 152725", "Sunrise Hospital PM SG 3.5.26 — Service 155226", "Sunrise Hospital SG 7.27.23 — Service 131323", "UBC-International Training Ctr 6-26 — Service 157126", "Venetian Expo Halls — Service 154425", "Venetian Expo MF — Service 154825", "Venetian Level 2 SG — Service 152925", "Venetian Level 3-4 Inspection 5.15.25 — Service 147725", "Venetian TI SG — Service 151825", "Virgin Hotels - Las Vegas MF 12-25 — Service 152925", "Walmart Distribution Center — Service 140324", "Westgate SG/MF — Service 141424", "Westin SG — Service 148825", "Wynn MF — Service 134619", "Wynn SG Parts 5.10.24 — Service 141224", "9-26 CCSD Ed Von Tobel — Warranty 975426", "10-26 Symphony Park Hotel - SG — Warranty 975826", "10-26 VCR - MF — Warranty 975726", "Brinley MS — Warranty 974526", "CCSD CW Woodbury — Warranty 975526", "Center of Excellence — Warranty 973025", "CHF Durango Drop-Seal Mech. 5.19.24 — Warranty 971925", "CoLV SF — Warranty 972825", "Deloitte — Warranty 971524", "Desert Vista — Warranty 975326", "DYDYT — Warranty 971324", "Eide Bailey — Warranty 972525", "Fontanesi — Warranty 972025", "Gensler Office 6.2.25 — Warranty 972425", "GVR MF — Warranty 975126", "Helix Electric ST — Warranty 973925", "Jerome Mack KW — Warranty 972725", "LCB Building 17 — Warranty 973325", "Mark 1 Apartments — Warranty 974425", "MGM Legal — Warranty 973625", "Mountain View Hospital — Warranty 971824", "OYO Hotel — Warranty 972625", "Park MGM — Warranty 973825", "Planet Hollywood — Warranty 973525", "Project Neon — Warranty 972225", "Red Rock — Warranty 973725", "Sands — Warranty 973125", "Silver Mesa Recreation Center 9.15.25 — Warranty 973925", "Stonebridge Meetinghouse MF Jamb 5-26 — Warranty 975826", "Sunset — Warranty 972325", "UNLV Med School — Warranty 975226", "VCR - Jerry's — Warranty 973425", "Venetian Opera — Warranty 972125", "Venetian Tower — Warranty 972425", "West Career — Warranty 974325", "WKSY Stadium — Warranty 971924", "Wynn — Warranty 971424", "Wynn Encore — Warranty 971224", "Wynn Nightclub — Warranty 971624", "Wynn Pier — Warranty 971724", "Wynn TI — Warranty 971824", "Other"], products: ["Modernfold", "Smokeguard", "Skyfold", "Solatube", "Kalwall", "Panelfold", "Hufcor", "Other (Please state in work performed)"], crew: ["Kai", "Chris", "Zane", "Eduardo Sr", "Armando", "Robert", "Steven", "Eduardo Jr", "Fabian", "Jose", "Mike", "Anthony"], leads: ["Zane", "Robert", "Chris", "Mike", "Fabian", "Eduardo Jr"] };
+var selectedJob = '';
+
+function $(id){ return document.getElementById(id); }
 if (!STAGING) $('previewBar').style.display = 'none';
 
-var today = new Date();
-$('date').value = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
-
-function buildChips(){
-  var cc = $('crewChips'); cc.innerHTML = '';
-  DATA.crew.forEach(function(name){
-    var s = document.createElement('span'); s.className = 'chip'; s.textContent = name;
-    s.onclick = function(){ s.classList.toggle('on'); };
-    cc.appendChild(s);
-  });
-  var lc = $('leadChips'); lc.innerHTML = '';
-  DATA.leads.forEach(function(name){
+function buildSingle(containerId, options){
+  var c = $(containerId); c.innerHTML = '';
+  options.forEach(function(name){
     var s = document.createElement('span'); s.className = 'chip'; s.textContent = name;
     s.onclick = function(){
-      lc.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
+      c.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('on'); });
       s.classList.add('on');
     };
-    lc.appendChild(s);
+    c.appendChild(s);
   });
 }
-
-/* --- Job picker + auto-fill --- */
-var search = $('jobSearch'), results = $('jobResults');
-search.addEventListener('input', function(){
-  selectedJob = '';
-  var q = search.value.toLowerCase().trim();
-  var matches = DATA.jobs.filter(function(j){ return j.toLowerCase().indexOf(q) >= 0; }).slice(0, 40);
-  results.innerHTML = '';
-  matches.forEach(function(j){
-    var d = document.createElement('div'); d.textContent = j;
-    d.onclick = function(){ pickJob(j); };
-    results.appendChild(d);
+function singleValue(containerId){
+  var on = $(containerId).querySelector('.chip.on');
+  return on ? on.textContent : '';
+}
+function buildMulti(containerId, options){
+  var c = $(containerId); c.innerHTML = '';
+  options.forEach(function(name){
+    var s = document.createElement('span'); s.className = 'chip'; s.textContent = name;
+    s.onclick = function(){ s.classList.toggle('on'); };
+    c.appendChild(s);
   });
-  results.style.display = matches.length ? 'block' : 'none';
-});
-search.addEventListener('focus', function(){ if (search.value) search.dispatchEvent(new Event('input')); });
-document.addEventListener('click', function(e){ if (!e.target.closest('.picker')) results.style.display = 'none'; });
+}
+function multiValues(containerId){
+  return Array.prototype.map.call($(containerId).querySelectorAll('.chip.on'), function(x){ return x.textContent; });
+}
 
-function pickJob(job){
-  selectedJob = job;
-  search.value = job;
-  results.style.display = 'none';
-  $('pocList').innerHTML = ''; addPoc('', POC_TITLES[0], false);
+/* --- Type-to-search picker (same behavior as the Daily Report) --- */
+function makePicker(inputId, resultsId, jobs, onPick){
+  var search = $(inputId), results = $(resultsId);
+  search.addEventListener('input', function(){
+    onPick('');
+    var q = search.value.toLowerCase().trim();
+    var matches = jobs.filter(function(j){ return j.toLowerCase().indexOf(q) >= 0; }).slice(0, 40);
+    results.innerHTML = '';
+    matches.forEach(function(j){
+      var d = document.createElement('div'); d.textContent = j;
+      d.onclick = function(){ onPick(j); search.value = j; results.style.display = 'none'; };
+      results.appendChild(d);
+    });
+    results.style.display = matches.length ? 'block' : 'none';
+  });
+  search.addEventListener('focus', function(){ if (search.value) search.dispatchEvent(new Event('input')); });
+  document.addEventListener('click', function(e){ if (!e.target.closest('.picker')) results.style.display = 'none'; });
 }
-/* --- Jobsite POCs: up to 5, each with a title --- */
-var POC_TITLES = ['Superintendent', 'Assistant Superintendent', 'Project Manager', 'Framing Foreman', 'Drywall Foreman'];
-var POC_MAX = 5;
-function pocOptions(sel){
-  return POC_TITLES.map(function(t){ return '<option' + (t === sel ? ' selected' : '') + '>' + t + '</option>'; }).join('');
-}
-function makePocBox(name, title, autoFilled){
-  var box = document.createElement('div'); box.className = 'pocBox';
-  box.innerHTML = '<div class="pocHead"><span class="t"></span></div>' +
-    '<input type="text" placeholder="Name + phone &mdash; e.g. Gary, (702) 555-0123">' +
-    '<label class="sub">TITLE</label>' +
-    '<div class="selWrap"><select>' + pocOptions(title) + '</select></div>';
-  box.querySelector('input').value = name || '';
-  if (autoFilled){
-    var note = document.createElement('div'); note.className = 'auto'; note.id = 'pocAuto';
-    note.innerHTML = '&#10003; Auto-filled from a past report &mdash; type to change it.'; note.style.display = 'block';
-    box.appendChild(note);
-    box.querySelector('input').addEventListener('input', function(){ note.style.display = 'none'; });
+
+/* --- Photo zone: downscale + base64 (same as the Daily Report) --- */
+function makeZone(prefix, cap){
+  var arr = [], loading = 0;
+  var input = $(prefix + 'Input');
+  $(prefix + 'Add').onclick = function(){ input.click(); };
+  input.addEventListener('change', function(){
+    var files = Array.prototype.slice.call(this.files);
+    this.value = '';
+    files.forEach(function(f){
+      if (arr.length + loading >= cap) return; // hard cap, counting in-flight loads
+      loading++;
+      var img = new Image();
+      img.onload = function(){
+        loading--;
+        var scale = Math.min(1, 1600 / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        arr.push({ name: f.name.replace(/\.[^.]+$/, '') + '.jpg', mime: 'image/jpeg', base64: url.split(',')[1], thumb: url });
+        render();
+        URL.revokeObjectURL(img.src);
+      };
+      img.onerror = function(){ loading--; };
+      img.src = URL.createObjectURL(f);
+    });
+  });
+  function render(){
+    var t = $(prefix + 'Thumbs'); t.innerHTML = '';
+    arr.forEach(function(p, i){
+      var fig = document.createElement('figure');
+      var im = document.createElement('img'); im.src = p.thumb;
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = '×';
+      b.onclick = function(){ arr.splice(i, 1); render(); };
+      fig.appendChild(im); fig.appendChild(b); t.appendChild(fig);
+    });
+    $(prefix + 'Count').textContent = arr.length + ' of ' + cap + ' photos';
   }
-  return box;
-}
-function refreshPocs(){
-  var boxes = $('pocList').querySelectorAll('.pocBox');
-  boxes.forEach(function(box, i){
-    box.querySelector('.pocHead .t').textContent = 'POC ' + (i + 1);
-    var head = box.querySelector('.pocHead'), x = head.querySelector('.x');
-    if (i > 0 && !x){
-      x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = '\u2715';
-      x.onclick = function(){ box.remove(); refreshPocs(); };
-      head.appendChild(x);
-    }
-    if (i === 0 && x) x.remove();
-  });
-  $('pocCount').textContent = boxes.length + ' of ' + POC_MAX + ' POCs';
-  $('addPoc').style.display = boxes.length >= POC_MAX ? 'none' : '';
-}
-function addPoc(name, title, autoFilled){
-  if ($('pocList').querySelectorAll('.pocBox').length >= POC_MAX) return;
-  $('pocList').appendChild(makePocBox(name, title, autoFilled));
-  refreshPocs();
-}
-function parsePocs(stored){
-  if (!stored) return [];
-  return stored.split(' \u00B7 ').map(function(entry){
-    entry = entry.trim();
-    for (var i = 0; i < POC_TITLES.length; i++){
-      var suffix = ' \u2014 ' + POC_TITLES[i];
-      if (entry.slice(-suffix.length) === suffix) return { name: entry.slice(0, -suffix.length), title: POC_TITLES[i] };
-    }
-    return { name: entry, title: POC_TITLES[0] };
-  }).filter(function(p){ return p.name; }).slice(0, POC_MAX);
-}
-function buildPocString(){
-  var out = [];
-  $('pocList').querySelectorAll('.pocBox').forEach(function(box){
-    var name = box.querySelector('input').value.trim();
-    if (name) out.push(name + ' \u2014 ' + box.querySelector('select').value);
-  });
-  return out.join(' \u00B7 ');
-}
-$('addPoc').onclick = function(){ addPoc('', POC_TITLES[0], false); };
-addPoc('', POC_TITLES[0], false);
-
-/* --- Hours: computed from the arrival / departure wheels below --- */
-function fmtH(h){ return (Math.round(h * 100) / 100).toString(); }
-
-/* --- Arrival / departure time wheels --- */
-var ROWH = 46;
-function twFill(col, values){
-  var html = '<div class="tw-sp"></div>';
-  values.forEach(function(v){ html += '<div class="tw-it">' + v + '</div>'; });
-  col.innerHTML = html + '<div class="tw-sp"></div>';
-}
-function twIndex(col){ return Math.round(col.scrollTop / ROWH); }
-function twPaint(col){
-  var idx = twIndex(col), items = col.querySelectorAll('.tw-it');
-  for (var i = 0; i < items.length; i++) items[i].classList.toggle('sel', i === idx);
-}
-function twSet(col, idx){ col.scrollTop = idx * ROWH; twPaint(col); }
-function twRead(wheel){
-  function sel(part){
-    var col = wheel.querySelector('[data-part="' + part + '"]');
-    return col.querySelectorAll('.tw-it')[twIndex(col)].textContent;
-  }
-  var h = parseInt(sel('h'), 10), m = parseInt(sel('m'), 10), ap = sel('ap');
-  var hh = h % 12; if (ap === 'PM') hh += 12;
-  return { minutes: hh * 60 + m, label: h + ':' + sel('m') + ' ' + ap };
-}
-function fmtDur(mins){
-  var h = Math.floor(mins / 60), m = mins % 60, out = '';
-  if (h) out = h + (h === 1 ? ' hr' : ' hrs');
-  if (m) out += (out ? ' ' : '') + m + ' min';
-  return out || '0 min';
-}
-var arrivalStr = '', departureStr = '';
-function twUpdate(){
-  var a = twRead($('wheelArr')), d = twRead($('wheelDep'));
-  arrivalStr = a.label; departureStr = d.label;
-  var row = $('totalRow'), val = $('totalVal');
-  if (d.minutes > a.minutes){
-    hours = Math.round((d.minutes - a.minutes) / 60 * 100) / 100;
-    row.classList.remove('warn'); val.textContent = fmtDur(d.minutes - a.minutes);
-  } else {
-    hours = 0;
-    row.classList.add('warn'); val.textContent = 'Check times \u2014 departure is first';
-  }
-}
-function twWire(wheel, def){
-  var hours12 = [], mins = [], i;
-  for (i = 1; i <= 12; i++) hours12.push(i);
-  for (i = 0; i < 60; i += 5) mins.push(('0' + i).slice(-2));
-  var ch = wheel.querySelector('[data-part="h"]'), cm = wheel.querySelector('[data-part="m"]'), ca = wheel.querySelector('[data-part="ap"]');
-  twFill(ch, hours12); twFill(cm, mins); twFill(ca, ['AM', 'PM']);
-  [ch, cm, ca].forEach(function(col){
-    var t;
-    col.addEventListener('scroll', function(){
-      twPaint(col);
-      clearTimeout(t);
-      t = setTimeout(function(){ twSet(col, twIndex(col)); twUpdate(); }, 110);
-    }, { passive: true });
-  });
-  twSet(ch, hours12.indexOf(def.h)); twSet(cm, mins.indexOf(def.m)); twSet(ca, def.ap === 'PM' ? 1 : 0);
-}
-var wheelsInit = false;
-function initWheels(){
-  if (wheelsInit) return; wheelsInit = true;
-  twWire($('wheelArr'), { h: 5, m: '30', ap: 'AM' });
-  twWire($('wheelDep'), { h: 2, m: '00', ap: 'PM' });
-  twUpdate();
+  return {
+    count: function(){ return arr.length; },
+    files: function(){ return arr.map(function(p){ return { name: p.name, mime: p.mime, base64: p.base64 }; }); }
+  };
 }
 
-/* --- Delays shortcut --- */
-$('noDelays').onclick = function(){
-  var d = $('delays');
-  if (this.classList.contains('on')){ this.classList.remove('on'); d.value = ''; d.disabled = false; }
-  else { this.classList.add('on'); d.value = 'No delays'; d.disabled = true; }
-};
+function showErr(msg){ var e = $('err'); e.textContent = msg; e.style.display = 'block'; e.scrollIntoView({behavior:'smooth', block:'center'}); }
 
-/* --- Photos: downscale + base64 --- */
-$('addPhotos').onclick = function(){ $('fileInput').click(); };
-$('fileInput').addEventListener('change', function(){
-  var files = Array.prototype.slice.call(this.files);
-  this.value = '';
-  files.forEach(function(f){
-    if (photos.length >= 10) return;
-    var img = new Image();
-    img.onload = function(){
-      var scale = Math.min(1, 1600 / Math.max(img.width, img.height));
-      var c = document.createElement('canvas');
-      c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
-      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      var url = c.toDataURL('image/jpeg', 0.82);
-      photos.push({ name: f.name.replace(/\.[^.]+$/, '') + '.jpg', mime: 'image/jpeg', base64: url.split(',')[1], thumb: url });
-      renderThumbs();
-      URL.revokeObjectURL(img.src);
-    };
-    img.src = URL.createObjectURL(f);
-  });
-});
-function renderThumbs(){
-  var t = $('thumbs'); t.innerHTML = '';
-  photos.forEach(function(p, i){
-    var fig = document.createElement('figure');
-    var im = document.createElement('img'); im.src = p.thumb;
-    var b = document.createElement('button'); b.type = 'button'; b.textContent = '\u00D7';
-    b.onclick = function(){ photos.splice(i, 1); renderThumbs(); };
-    fig.appendChild(im); fig.appendChild(b); t.appendChild(fig);
-  });
-  $('photoCount').textContent = photos.length + ' of 10 photos';
-}
+buildSingle('productChips', DATA.products);
+buildSingle('signedChips', ["Yes", "No"]);
+buildMulti('crewChips', DATA.crew);
+buildSingle('leadChips', DATA.leads);
+makePicker('jobSearch', 'jobResults', DATA.jobs, function(j){ selectedJob = j; });
+var zone = makeZone('photos', 10);
 
 /* --- Submit --- */
-function showErr(msg){ var e = $('err'); e.textContent = msg; e.style.display = 'block'; e.scrollIntoView({behavior:'smooth', block:'center'}); }
 $('submitBtn').onclick = function(){
   $('err').style.display = 'none';
-  var crew = Array.prototype.map.call($('crewChips').querySelectorAll('.chip.on'), function(c){ return c.textContent; });
-  var lead = $('leadChips').querySelector('.chip.on');
   if (!selectedJob) return showErr('Pick the job from the list so it matches the office records.');
-  if (!mfrPicked()) return showErr('Tap the manufacturer of the wall you serviced.');
-  if (!mfrValue()) return showErr('Type the other manufacturer.');
-  if (!$('date').value) return showErr('Date is required.');
   if (!$('work').value.trim()) return showErr('Work Performed is required.');
+  var product = singleValue('productChips');
+  if (!product) return showErr('Tap the product you serviced.');
+  var signed = singleValue('signedChips');
+  if (!signed) return showErr('Work Order Signed is required — tap Yes or No.');
+  var crew = multiValues('crewChips');
   if (!crew.length) return showErr('Tap at least one crew member.');
-  if (!(hours > 0)) return showErr('Check the times \u2014 departure must be after arrival.');
-  if (!$('equipment').value.trim()) return showErr('Equipment on Site is required (write None if there was none).');
-  if (!$('delays').value.trim()) return showErr('Delays / Issues is required (or tap "No delays today").');
+  if (!$('hoursWorked').value.trim()) return showErr('Hours Worked on Site is required.');
+  var lead = singleValue('leadChips');
   if (!lead) return showErr('Tap your name under Submitted By.');
+  if (!$('recommended').value.trim()) return showErr('Recommended Parts/Service is required.');
 
-  var btn = $('submitBtn'); btn.disabled = true; btn.textContent = 'Sending\u2026';
   var payload = {
-    date: $('date').value, jobName: selectedJob, manufacturer: mfrValue(),
-    workPerformed: $('work').value.trim(), crew: crew, hours: hours, arrival: arrivalStr, departure: departureStr,
-    equipment: $('equipment').value.trim(), delays: $('delays').value.trim(),
-    poc: buildPocString(), submittedBy: lead.textContent,
-    photos: photos.map(function(p){ return { name: p.name, mime: p.mime, base64: p.base64 }; })
+    jobName: selectedJob,
+    workPerformed: $('work').value.trim(),
+    productServiced: product,
+    housingId: $('housingId').value.trim(),
+    workOrderSigned: signed,
+    crew: crew,
+    hoursWorked: $('hoursWorked').value.trim(),
+    submittedBy: lead,
+    recommendedParts: $('recommended').value.trim(),
+    poc: $('poc').value.trim(),
+    photos: zone.files()
   };
   if (STAGING) {
     console.log('[STAGING] Service Daily Report payload (not sent):', payload);
     $('form').style.display = 'none'; $('submitBar').style.display = 'none';
     $('success').style.display = 'block';
-    $('successText').textContent = selectedJob + ' \u00B7 ' + arrivalStr + ' \u2013 ' + departureStr + ' \u00B7 ' + fmtH(hours) + ' hrs \u00B7 ' + crew.length + ' crew \u00B7 ' + photos.length + ' photos. PREVIEW ONLY \u2014 nothing was sent.';
+    $('successText').textContent = selectedJob + ' · ' + product + ' · ' + crew.length + ' crew · ' + zone.count() + ' photos. PREVIEW ONLY — nothing was sent.';
     window.scrollTo(0, 0);
     return;
   }
+  var btn = $('submitBtn'); btn.disabled = true; btn.textContent = 'Sending…';
   fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
     .then(function(r){ return r.json(); })
     .then(function(r){
       if (!r || !r.ok) throw new Error((r && r.error) || 'send failed');
       $('form').style.display = 'none'; $('submitBar').style.display = 'none';
-      var s = $('success'); s.style.display = 'block';
-      $('successText').textContent = selectedJob + ' \u00B7 ' + arrivalStr + ' \u2013 ' + departureStr + ' \u00B7 ' + fmtH(hours) + ' hrs \u00B7 ' + crew.length + ' crew \u00B7 ' + (r.photoCount || 0) + ' photos. The office has it.';
-      if (r.learned) $('learnedText').textContent = 'Saved this address / POC for ' + baseName(selectedJob) + ' \u2014 next time it auto-fills.';
+      $('success').style.display = 'block';
+      $('successText').textContent = selectedJob + ' · ' + (r.photoCount || 0) + ' photos. The office has it.';
       window.scrollTo(0, 0);
     })
     .catch(function(e){
       btn.disabled = false; btn.textContent = 'Submit report';
-      showErr('Something went wrong sending the report. Your entries are still here \u2014 try Submit again.');
+      showErr('Something went wrong sending the report. Your entries are still here — try Submit again.');
     });
 };
-/* --- Manufacturer: the Service form's own field (Bobby, voice 2026-11-16).
-   The original form has a manufacturer section - crews service other makers'
-   walls (Hufcor etc.) in older buildings. Single-select chips; Other takes
-   free text. Option-list provenance: see ../FIELD-SPEC.md. --- */
-function buildMfr(){
-  var mc = $('mfrChips'); mc.innerHTML = '';
-  DATA.manufacturers.forEach(function(name){
-    var sp = document.createElement('span'); sp.className = 'chip'; sp.textContent = name;
-    sp.onclick = function(){
-      mc.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
-      sp.classList.add('on');
-      var other = $('mfrOther');
-      other.style.display = name === 'Other' ? '' : 'none';
-      if (name === 'Other') other.focus();
-    };
-    mc.appendChild(sp);
-  });
-}
-function mfrPicked(){
-  var on = $('mfrChips').querySelector('.chip.on');
-  return on ? on.textContent : '';
-}
-function mfrValue(){
-  var p = mfrPicked();
-  if (!p) return '';
-  return p === 'Other' ? $('mfrOther').value.trim() : p;
-}
-/* staging init: embedded data, no bootstrap fetch */
-initWheels();
-buildChips();
-buildMfr();
 </script>
 </body>
 </html>

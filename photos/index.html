@@ -101,38 +101,46 @@
   <header>
     <div class="logowrap"><svg viewBox="0 0 360 84" width="190" height="44" role="img" aria-label="SunStone Building Specialties"><text x="180" y="40" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="42" font-weight="bold" fill="#ffffff">SunStone</text><text x="180" y="70" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="15.5" letter-spacing="3.5" fill="#cbd5e1">BUILDING SPECIALTIES</text></svg></div>
     <h1>Jobsite Photos</h1>
-    <p class="sub">Share photos from today&rsquo;s job site. Complete before end of the day.</p>
+    <p class="sub">-Upload any additional photos you have of the jobsite after filling out the Daily Report</p>
   </header>
 
   <form id="form" autocomplete="off">
     <section class="card">
       <h2><span class="num">1</span> The Job</h2>
-      <label for="date">Date <span class="req">*</span></label>
-      <input type="date" id="date" required>
       <label for="jobSearch">Job Name <span class="req">*</span></label>
       <div class="picker">
         <input type="text" id="jobSearch" placeholder="Type to search &mdash; e.g. Four Seasons">
         <div class="results" id="jobResults"></div>
       </div>
+      <label for="jobService">Job Name (For Service) <span class="opt">(optional)</span></label>
+      <input type="text" id="jobService" placeholder="Service job name, if this is a service job">
     </section>
 
     <section class="card">
-      <h2><span class="num">2</span> Photos</h2>
-      <label>Jobsite Photos <span class="req">*</span> <span class="opt">(up to 10)</span></label>
-      <div class="photozone">
-        <p>Progress, finished work, issues</p>
-        <button type="button" class="addbtn" id="addPhotos">+ Add photos</button>
-        <input type="file" id="fileInput" accept="image/*" multiple hidden>
-        <div class="thumbs" id="thumbs"></div>
-        <div class="count" id="photoCount">0 of 10 photos</div>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2><span class="num">3</span> Who&rsquo;s Sending These?</h2>
+      <h2><span class="num">2</span> Who&rsquo;s Sending These?</h2>
       <p class="hint">Tap your name.</p>
       <label>Submitted By <span class="req">*</span></label>
       <div class="chips" id="leadChips"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">3</span> Photos</h2>
+      <label>Jobsite Photos (10 max limit) <span class="opt">(optional)</span></label>
+      <div class="photozone">
+        <p>Up to 10 photos, 10 MB each</p>
+        <button type="button" class="addbtn" id="photos10Add">+ Add photos</button>
+        <input type="file" id="photos10Input" accept="image/*" multiple hidden>
+        <div class="thumbs" id="photos10Thumbs"></div>
+        <div class="count" id="photos10Count">0 of 10 photos</div>
+      </div>
+      <label>Jobsite Photos (5 max limit) <span class="opt">(optional)</span></label>
+      <div class="photozone">
+        <p>Up to 5 photos, 100 MB each</p>
+        <button type="button" class="addbtn" id="photos5Add">+ Add photos</button>
+        <input type="file" id="photos5Input" accept="image/*" multiple hidden>
+        <div class="thumbs" id="photos5Thumbs"></div>
+        <div class="count" id="photos5Count">0 of 5 photos</div>
+      </div>
     </section>
 
     <div class="err" id="err"></div>
@@ -140,7 +148,7 @@
 
   <div id="success">
     <div class="big">&#9989;</div>
-    <h2>Photos sent</h2>
+    <h2>Your response has been recorded</h2>
     <p id="successText"></p>
     <button type="button" onclick="location.reload()">Send more photos</button>
   </div>
@@ -155,110 +163,144 @@
 <script>
 var STAGING = true; // GO-LIVE: set false and put the Jobsite Photos backend /exec URL in API
 var API = '';
-var DATA = { jobs: ["Lakemead & Engalsted (MF) 602025", "VCR Refresh (MF) 604626", "3rd St (SG) 602625", "Anthem Sky Desert (MF) 606526", "Apex B2 (MF) 605726", "Pompino Law (MF) 604926", "Sky Zone (MF) 606126", "Shark Reef (KW) 604826", "SN Forensics (SG) 605626", "Oasis @ Death Valley (SG) 606626", "NRP Durango (SG) 603225", "Mesquite (MF) 602725", "VCR C-suites (MF) 604626", "West Henderson Fieldhouse (MF) 604226", "Durango Expansion (MF) 606826", "CCSD Cashman (MF) 607426", "CCSD Gibson (MF) 607126", "CCSD Gibson (ST) 607226", "Four Seasons (SG) 601925", "CCSD Indian Springs (MF) 607326", "Lone Mountain Temple (SG) 602225", "Lone Mountain Meeting (SF) 603425", "Lone Mountain Meeting (MF) 602925", "Janice Brooks Bay (KW) 602525", "HRHC (MF) 602825", "Grand Canyon (MF) 605826", "DOA (MF) 571824", "Desert Vista (MF) 605526", "Covista (MF) 606326", "NAFB Coral Academy (KW) 604526", "NAFB Coral Academy (MF) 604426", "Community Ambulance (MF) 605026", "CDW (MF) 602325", "CCSD Skye Canyon (MF) 606426", "CCSD Mojave (KW) 605926", "CCSD LVA (MF) 601825", "Brightline (MF) 603525", "Shop/Organize", "Site Visits/Meetings", "VA Education Bldg (MF) 607026", "Four Seasons (MF) 601625", "Mountain Shadow (MF) 607726", "Or Bamidbar Chabad (MF) 606926", "Residence Inn by Marriott (MF) 607626", "Carter Cullen (MF) 607826", "Salvation Army (MF)", "CCSD Matt Kelly (MF) 607526", "Sunbit - NDL Group (MF) 605326", "Pinecrest Lindell Academy (MF) 604326", "LVVWD East Admin HR Renovations (MF) 603625", "Chicken and Pickle (MF) 600825", "Beacon Academy Phase 2 & 3 (MF) 601725", "FMS1 Field Maintenance Shop 1 (MF) 600525", "Intermountain Health SW Clinic (MF) 566923", "NLV Fire Station #51 (KW) 600725", "TSOF Shaq Boys & Girls Club (MF) 603125", "Summit View Youth Center (MF) 601325", "CCSD Helen Smith ES (MF) 601525", "Kaktus Life 3 (SG) 561122", "Advocacy & Justice Complex (ST) 605426", "VCR PAL Building (MF) 606726", "SNRHA - Marion D. Bennett (SG) 605226", "Xtreme Cubes Corp (MF) 605126", "Suncoast Re-Positioning (MF) 601125", "SunCat - Gibson (ST) 604726", "SunCat - ST Parts (ST) 606326", "CoLV Regional Aquatic Center (MF) 601025", "Venetian Cote' (MF) 601425", "Sunrise Foundation Desert Rose (ST) 604125", "DRC Replacement Bldgs (KW) 603025", "Palazzo Bazaar (SG) 602425", "CCSD Kirk Adams ES Roof Recover (KW) 603325", "Murphy Hacienda (KW) 602125", "Jim Leeming - Skylights (KW) 606026", "CCSD Wengert ES (MF) 601225", "Santa Fe Steakhouse (MF) 607926", "Latexias Mexican (MF) 608026"], leads: ["Robert", "Eduardo Jr", "Chris", "Fabian", "Mike", "Zane", "Kevin"] };
-var selectedJob = '', photos = [];
+var DATA = { jobs: ["Lakemead & Engalsted (MF)", "VCR Refresh (MF)", "3rd St (SG)", "Anthem Sky Desert (MF)", "Apex B2 (MF)", "Pompino Law (MF)", "Sky Zone (MF)", "Shark Reef (KW)", "SN Forensics (SG)", "Oasis @ Death Valley (SG)", "NRP Durango (SG)", "Mesquite (MF)", "LVVWD (MF)", "VCR C-suites (MF)", "West Henderson Fieldhouse (MF)", "Durango Expansion (MF)", "CCSD Cashman (MF)", "CCSD Gibson (MF)", "CCSD Gibson (ST)", "Four Seasons (SG)", "CCSD Indian Springs (MF)", "Lone Mountain Temple (SG)", "Lone Mountain Meeting (SF)", "Lone Mountain Meeting (MF)", "Kaktus Life (SG)", "Janice Brooks Bay (KW)", "HRHC (MF)", "Grand Canyon (MF)", "Faith Lutheren (SF)", "DRC (KW)", "DOA (MF)", "Desert Vista (MF)", "Covista (MF)", "NAFB Coral Academy (KW)", "NAFB Coral Academy (MF)", "Community Ambulance (MF)", "CDW (MF)", "CCSD Skye Canyon (MF)", "CCSD Mojave (KW)", "CCSD LVA (MF)", "CCSD Wengert (MF)", "Brightline (MF)", "Fountain Bleau (service)", "Circa (service)", "The Orleans (service)", "Shop/Organize", "TSOF - Boys & Girls Club", "Site Visits/Meetings", "VA Education Building", "Service"], leads: ["Robert", "Eduardo Jr", "Chris", "Fabian", "Mike", "Jose", "Armando", "Zane", "Steven", "Scott", "Eduardo Sr", "Kevin", "Anthony"] };
+var selectedJob = '';
+
 function $(id){ return document.getElementById(id); }
 if (!STAGING) $('previewBar').style.display = 'none';
 
-var today = new Date();
-$('date').value = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
-
-/* --- Submitted By chips (single-select) --- */
-var lc = $('leadChips');
-DATA.leads.forEach(function(name){
-  var sp = document.createElement('span'); sp.className = 'chip'; sp.textContent = name;
-  sp.onclick = function(){
-    lc.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('on'); });
-    sp.classList.add('on');
-  };
-  lc.appendChild(sp);
-});
-
-/* --- Job picker (same behavior as the Daily Report) --- */
-var search = $('jobSearch'), results = $('jobResults');
-search.addEventListener('input', function(){
-  selectedJob = '';
-  var q = search.value.toLowerCase().trim();
-  var matches = DATA.jobs.filter(function(j){ return j.toLowerCase().indexOf(q) >= 0; }).slice(0, 40);
-  results.innerHTML = '';
-  matches.forEach(function(j){
-    var d = document.createElement('div'); d.textContent = j;
-    d.onclick = function(){ selectedJob = j; search.value = j; results.style.display = 'none'; };
-    results.appendChild(d);
-  });
-  results.style.display = matches.length ? 'block' : 'none';
-});
-search.addEventListener('focus', function(){ if (search.value) search.dispatchEvent(new Event('input')); });
-document.addEventListener('click', function(e){ if (!e.target.closest('.picker')) results.style.display = 'none'; });
-
-/* --- Photos: downscale + base64 (same as the Daily Report) --- */
-$('addPhotos').onclick = function(){ $('fileInput').click(); };
-$('fileInput').addEventListener('change', function(){
-  var files = Array.prototype.slice.call(this.files);
-  this.value = '';
-  files.forEach(function(f){
-    if (photos.length >= 10) return;
-    var img = new Image();
-    img.onload = function(){
-      var scale = Math.min(1, 1600 / Math.max(img.width, img.height));
-      var c = document.createElement('canvas');
-      c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
-      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      var url = c.toDataURL('image/jpeg', 0.82);
-      photos.push({ name: f.name.replace(/\.[^.]+$/, '') + '.jpg', mime: 'image/jpeg', base64: url.split(',')[1], thumb: url });
-      renderThumbs();
-      URL.revokeObjectURL(img.src);
+function buildSingle(containerId, options){
+  var c = $(containerId); c.innerHTML = '';
+  options.forEach(function(name){
+    var s = document.createElement('span'); s.className = 'chip'; s.textContent = name;
+    s.onclick = function(){
+      c.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('on'); });
+      s.classList.add('on');
     };
-    img.src = URL.createObjectURL(f);
+    c.appendChild(s);
   });
-});
-function renderThumbs(){
-  var t = $('thumbs'); t.innerHTML = '';
-  photos.forEach(function(p, i){
-    var fig = document.createElement('figure');
-    var im = document.createElement('img'); im.src = p.thumb;
-    var b = document.createElement('button'); b.type = 'button'; b.textContent = '\u00D7';
-    b.onclick = function(){ photos.splice(i, 1); renderThumbs(); };
-    fig.appendChild(im); fig.appendChild(b); t.appendChild(fig);
+}
+function singleValue(containerId){
+  var on = $(containerId).querySelector('.chip.on');
+  return on ? on.textContent : '';
+}
+function buildMulti(containerId, options){
+  var c = $(containerId); c.innerHTML = '';
+  options.forEach(function(name){
+    var s = document.createElement('span'); s.className = 'chip'; s.textContent = name;
+    s.onclick = function(){ s.classList.toggle('on'); };
+    c.appendChild(s);
   });
-  $('photoCount').textContent = photos.length + ' of 10 photos';
+}
+function multiValues(containerId){
+  return Array.prototype.map.call($(containerId).querySelectorAll('.chip.on'), function(x){ return x.textContent; });
 }
 
-/* --- Submit --- */
+/* --- Type-to-search picker (same behavior as the Daily Report) --- */
+function makePicker(inputId, resultsId, jobs, onPick){
+  var search = $(inputId), results = $(resultsId);
+  search.addEventListener('input', function(){
+    onPick('');
+    var q = search.value.toLowerCase().trim();
+    var matches = jobs.filter(function(j){ return j.toLowerCase().indexOf(q) >= 0; }).slice(0, 40);
+    results.innerHTML = '';
+    matches.forEach(function(j){
+      var d = document.createElement('div'); d.textContent = j;
+      d.onclick = function(){ onPick(j); search.value = j; results.style.display = 'none'; };
+      results.appendChild(d);
+    });
+    results.style.display = matches.length ? 'block' : 'none';
+  });
+  search.addEventListener('focus', function(){ if (search.value) search.dispatchEvent(new Event('input')); });
+  document.addEventListener('click', function(e){ if (!e.target.closest('.picker')) results.style.display = 'none'; });
+}
+
+/* --- Photo zone: downscale + base64 (same as the Daily Report) --- */
+function makeZone(prefix, cap){
+  var arr = [], loading = 0;
+  var input = $(prefix + 'Input');
+  $(prefix + 'Add').onclick = function(){ input.click(); };
+  input.addEventListener('change', function(){
+    var files = Array.prototype.slice.call(this.files);
+    this.value = '';
+    files.forEach(function(f){
+      if (arr.length + loading >= cap) return; // hard cap, counting in-flight loads
+      loading++;
+      var img = new Image();
+      img.onload = function(){
+        loading--;
+        var scale = Math.min(1, 1600 / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        arr.push({ name: f.name.replace(/\.[^.]+$/, '') + '.jpg', mime: 'image/jpeg', base64: url.split(',')[1], thumb: url });
+        render();
+        URL.revokeObjectURL(img.src);
+      };
+      img.onerror = function(){ loading--; };
+      img.src = URL.createObjectURL(f);
+    });
+  });
+  function render(){
+    var t = $(prefix + 'Thumbs'); t.innerHTML = '';
+    arr.forEach(function(p, i){
+      var fig = document.createElement('figure');
+      var im = document.createElement('img'); im.src = p.thumb;
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = '×';
+      b.onclick = function(){ arr.splice(i, 1); render(); };
+      fig.appendChild(im); fig.appendChild(b); t.appendChild(fig);
+    });
+    $(prefix + 'Count').textContent = arr.length + ' of ' + cap + ' photos';
+  }
+  return {
+    count: function(){ return arr.length; },
+    files: function(){ return arr.map(function(p){ return { name: p.name, mime: p.mime, base64: p.base64 }; }); }
+  };
+}
+
 function showErr(msg){ var e = $('err'); e.textContent = msg; e.style.display = 'block'; e.scrollIntoView({behavior:'smooth', block:'center'}); }
+
+buildSingle('leadChips', DATA.leads);
+makePicker('jobSearch', 'jobResults', DATA.jobs, function(j){ selectedJob = j; });
+var zone10 = makeZone('photos10', 10);
+var zone5 = makeZone('photos5', 5);
+
+/* --- Submit --- */
 $('submitBtn').onclick = function(){
   $('err').style.display = 'none';
-  var lead = $('leadChips').querySelector('.chip.on');
   if (!selectedJob) return showErr('Pick the job from the list so the photos file under the right job.');
-  if (!$('date').value) return showErr('Date is required.');
-  if (!photos.length) return showErr('Add at least one photo.');
+  var lead = singleValue('leadChips');
   if (!lead) return showErr('Tap your name under Submitted By.');
 
   var payload = {
-    date: $('date').value, jobName: selectedJob, submittedBy: lead.textContent,
-    photos: photos.map(function(p){ return { name: p.name, mime: p.mime, base64: p.base64 }; })
+    jobName: selectedJob,
+    jobNameService: $('jobService').value.trim(),
+    submittedBy: lead,
+    photos10: zone10.files(),
+    photos5: zone5.files()
   };
   if (STAGING) {
     console.log('[STAGING] Jobsite Photos payload (not sent):', payload);
     $('form').style.display = 'none'; $('submitBar').style.display = 'none';
     $('success').style.display = 'block';
-    $('successText').textContent = selectedJob + ' \u00B7 ' + photos.length + (photos.length === 1 ? ' photo' : ' photos') + ' \u00B7 sent by ' + lead.textContent + '. PREVIEW ONLY \u2014 nothing was sent.';
+    $('successText').textContent = selectedJob + ' · ' + zone10.count() + ' + ' + zone5.count() + ' photos · sent by ' + lead + '. PREVIEW ONLY — nothing was sent.';
     window.scrollTo(0, 0);
     return;
   }
-  var btn = $('submitBtn'); btn.disabled = true; btn.textContent = 'Sending\u2026';
+  var btn = $('submitBtn'); btn.disabled = true; btn.textContent = 'Sending…';
   fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) })
     .then(function(r){ return r.json(); })
     .then(function(r){
       if (!r || !r.ok) throw new Error((r && r.error) || 'send failed');
       $('form').style.display = 'none'; $('submitBar').style.display = 'none';
       $('success').style.display = 'block';
-      $('successText').textContent = selectedJob + ' \u00B7 ' + (r.photoCount || 0) + ' photos. The office has them.';
+      $('successText').textContent = selectedJob + ' · ' + (r.photoCount || 0) + ' photos. The office has them.';
       window.scrollTo(0, 0);
     })
     .catch(function(e){
       btn.disabled = false; btn.textContent = 'Send photos';
-      showErr('Something went wrong sending the photos. Your picks are still here \u2014 try Send again.');
+      showErr('Something went wrong sending the photos. Your picks are still here — try Send again.');
     });
 };
 </script>
